@@ -12,6 +12,7 @@ class Container {
       return archivoParseado;
     } catch (err) {
       console.log(err);
+      this.archivo = [];
     }
   }
   //genero un metodo para guardar nuevos productos
@@ -67,6 +68,7 @@ class Container {
       let idProd = content.find((prod) => prod.id === id);
       // mostramos el producto
       console.log(`Resultado de su busqueda segun id: ${id} es: `, idProd);
+      return idProd;
     } catch (error) {
       //Emitimos mensaje en caso de error
       throw new Error(error, "Error to get the product by id");
@@ -76,11 +78,12 @@ class Container {
   async getAll() {
     try {
       const content = await this.#leerFile();
+      return content;
       console.log(content);
       // let content = await fs.promises.readFile(this.file, "utf-8");
       // console.log(content);
       // // retornamos el resultado en JSON y lo parseamos
-      // return JSON.parse(content);
+      return content;
     } catch (error) {
       // Generamos mensaje en caso de error
       throw new Error(error, "Error to get all the products");

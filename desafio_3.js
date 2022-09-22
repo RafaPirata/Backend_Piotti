@@ -31,3 +31,23 @@ app.get("/productoRandom", (req, res) => {
     console.log(`Hola Randon ${randomNumber}`);
   });
 });
+
+const frase = "Hola mundo como estan";
+// app.get("/api/frase", (req, res) => {
+//   res.status(200).json({ frase });
+// });
+
+app.get("/api/frase/", (req, res) => {
+  res.status(200).json({ frase: `${frase}` });
+});
+
+app.get("/api/letras/:num", (req, res) => {
+  const { num } = req.params;
+  res.status(200).json({ letra: `${frase[num]}` });
+});
+
+app.get("/api/palabras/:num", (req, res) => {
+  const { num } = req.params;
+  let frase2 = frase.split(" ");
+  res.status(200).json({ palabra: `${frase2[num]}` });
+});

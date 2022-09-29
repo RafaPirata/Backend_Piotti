@@ -1,0 +1,15 @@
+.table td {
+            vertical-align: middle;
+        };
+.table th {
+            vertical-align: middle;
+        };
+h1 {
+    color: blue;
+};
+hr {
+    background-color: #ddd;
+};
+.card-footer {
+    min-height: 100vh;
+};

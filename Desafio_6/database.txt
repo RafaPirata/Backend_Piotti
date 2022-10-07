@@ -1,0 +1,14 @@
+[
+    {
+        "nombre": "producto 5",
+        "precio": 50,
+        "thumbnail": "https://cdn3.iconfinder.com/data/icons/street-food-and-food-trucker-1/64/pizza-fast-food-bake-bread-128.png",
+        "id": 1
+    },
+    {
+        "title": "rafa",
+        "price": "123",
+        "thumbnail": "https://cdn3.iconfinder.com/data/icons/street-food-and-food-trucker-1/64/pizza-fast-food-bake-bread-128.png",
+        "id": 2
+    }
+]

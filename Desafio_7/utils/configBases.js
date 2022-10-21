@@ -10,7 +10,7 @@ const optionsMariaDB = {
 
 const optionsSqlite = {
   client: "sqlite3",
-  connection: { filename: "../db/ecommerce.sqlite" },
+  connection: { filename: "./db/ecommerce.sqlite" },
   useNullAsDefault: true,
 };
 

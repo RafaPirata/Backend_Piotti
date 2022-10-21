@@ -6,7 +6,7 @@ function mostrarProductos(data) {
       return `<tr>
           <td scope="row">${elem.title}</td>
           <td scope="row">${elem.price}</td>
-          <td scope="row"><img src="${elem.url}" alt="${elem.title}" height="30px"/></td>
+          <td scope="row"><img src="${elem.url}" alt="${elem.title}" height="31px"/></td>
       </tr>`;
     })
     .join(" ");

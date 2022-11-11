@@ -10,11 +10,11 @@ const optionsMariaDB = {
 
 const optionsSqlite = {
   client: "sqlite3",
-  connection: { filename: "./db/ecommerce.sqlite" },
+  connection: { filename: "../DB/ecommerce.sqlite" },
   useNullAsDefault: true,
 };
 const fileSystem = {
-  path: "./db",
+  path: "../DB",
 };
 
 module.exports = { optionsMariaDB, optionsSqlite, fileSystem };

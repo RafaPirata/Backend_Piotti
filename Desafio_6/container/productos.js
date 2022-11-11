@@ -1,14 +1,6 @@
 class Container {
   constructor() {
-    this.productos = [
-      {
-        id: 1,
-        title: "Hamburguesa Simple",
-        price: 100,
-        thumbnail:
-          "https://cdn3.iconfinder.com/data/icons/street-food-and-food-trucker-1/64/pizza-fast-food-bake-bread-128.png",
-      },
-    ];
+    this.productos = [];
     this.id = 0;
   }
 

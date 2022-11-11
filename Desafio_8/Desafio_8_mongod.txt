@@ -1,0 +1,332 @@
+
+--- crear una base llamada "ecommerce"-------------------
+db.createCollection("ecommerce")
+{ ok: 1 }
+
+-- Dos colecciones, mensajes y productos--------------------
+
+use ecommerce
+'switched to db ecommerce'
+
+db.createCollection("mensajes")
+{ ok: 1 }
+db.createCollection("productos")
+{ ok: 1 }
+------------------------------------------------------------------------------------------------------------------------------------------
+---------crear 10 documentos con valores distintos en mesajes------------------------------------------------------------
+
+ db.ecommerce.insertMany[
+   { usuario: "rafa@hotmail.com", mensaje: "Hola buen dia!!" },
+   {
+     usuario: "admin@hotmail.com",
+     mensaje: "buen, dia gracias por comunicarce, en que lo puedo ayudar?",
+   },
+   {
+     usuario: "rafa@hotmail.com",
+     mensaje: "me confirma el precio de H simple",
+   },
+   { usuario: "rrcamel@hotmail.com", mensaje: "Hola consulta?" },
+   {
+     usuario: "admin@hotmail.com",
+     mensaje: "hola rrcamel, cual seria?",
+   },
+   {
+     usuario: "admin@hotmail.com",
+     mensaje: "buen, dia gracias por comunicarce, en que lo puedo ayudar?",
+   },
+   {
+     usuario: "admin@hotmail.com",
+     mensaje: "rafa, $700",
+   },
+   {
+     usuario: "kro@hotmail.com",
+     mensaje: "hola puedo hacer un pedido?",
+   },
+   {
+     usuario: "admin@hotmail.com",
+     mensaje: "hola kro, si...",
+   },
+   {
+     usuario: "kro@hotmail.com",
+     mensaje: "1 H completa",
+   },
+ ]
+{ acknowledged: true,
+  insertedIds: 
+   { '0': ObjectId("635810969e0b38cdb0b3e795"),
+     '1': ObjectId("635810969e0b38cdb0b3e796"),
+     '2': ObjectId("635810969e0b38cdb0b3e797"),
+     '3': ObjectId("635810969e0b38cdb0b3e798"),
+     '4': ObjectId("635810969e0b38cdb0b3e799"),
+     '5': ObjectId("635810969e0b38cdb0b3e79a"),
+     '6': ObjectId("635810969e0b38cdb0b3e79b"),
+     '7': ObjectId("635810969e0b38cdb0b3e79c"),
+     '8': ObjectId("635810969e0b38cdb0b3e79d"),
+     '9': ObjectId("635810969e0b38cdb0b3e79e") } }
+
+---------crear 10 documentos con valores distintos en productos ------------------------------------------------------------
+
+db.productos.insertMany([
+  {
+    title: "Hamburguesa Simple",
+    price: 700,
+    url: "https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=",
+  },
+  {
+    title: "Hamburguesa simple C/ cheddar",
+    price: 800,
+    url: "https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=",
+  },
+  {
+    title: "Hamburguesa Simple C/ ch + papa",
+    price: 1000,
+    url: "https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=",
+  },
+  {
+    title: "Hamburguesa Completa ",
+    price: 1300,
+    url: "https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=",
+  },
+  {
+    title: "Hamburguesa Completa C/ch + papa + esp",
+    price: 2000,
+    url: "https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=",
+  },
+  {
+    title: "Hamburguesa Especial",
+    price: 3000,
+    url: "https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=",
+  },
+  {
+    title: "Hamburguesa Especial triple",
+    price: 4000,
+    url: "https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=",
+  },
+  {
+    title: "Hamburguesa De la casa",
+    price: 4500,
+    url: "https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=",
+  },
+  {
+    title: "Hamburguesa Simple doble",
+    price: 850,
+    url: "https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=",
+  },
+  {
+    title: "Hamburguesa simple triple",
+    price: 1100,
+    url: "https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=",
+  },
+])
+{ acknowledged: true,
+  insertedIds: 
+   { '0': ObjectId("635814669e0b38cdb0b3e79f"),
+     '1': ObjectId("635814669e0b38cdb0b3e7a0"),
+     '2': ObjectId("635814669e0b38cdb0b3e7a1"),
+     '3': ObjectId("635814669e0b38cdb0b3e7a2"),
+     '4': ObjectId("635814669e0b38cdb0b3e7a3"),
+     '5': ObjectId("635814669e0b38cdb0b3e7a4"),
+     '6': ObjectId("635814669e0b38cdb0b3e7a5"),
+     '7': ObjectId("635814669e0b38cdb0b3e7a6"),
+     '8': ObjectId("635814669e0b38cdb0b3e7a7"),
+     '9': ObjectId("635814669e0b38cdb0b3e7a8") } }
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-----3) mostrar la coleccion mensajes
+db.mensajes.find()
+
+{ _id: ObjectId("635810969e0b38cdb0b3e795"),
+  usuario: 'rafa@hotmail.com',
+  mensaje: 'Hola buen dia!!' }
+{ _id: ObjectId("635810969e0b38cdb0b3e796"),
+  usuario: 'admin@hotmail.com',
+  mensaje: 'buen, dia gracias por comunicarce, en que lo puedo ayudar?' }
+{ _id: ObjectId("635810969e0b38cdb0b3e797"),
+  usuario: 'rafa@hotmail.com',
+  mensaje: 'me confirma el precio de H simple' }
+{ _id: ObjectId("635810969e0b38cdb0b3e798"),
+  usuario: 'rrcamel@hotmail.com',
+  mensaje: 'Hola consulta?' }
+{ _id: ObjectId("635810969e0b38cdb0b3e799"),
+  usuario: 'admin@hotmail.com',
+  mensaje: 'hola rrcamel, cual seria?' }
+{ _id: ObjectId("635810969e0b38cdb0b3e79a"),
+  usuario: 'admin@hotmail.com',
+  mensaje: 'buen, dia gracias por comunicarce, en que lo puedo ayudar?' }
+{ _id: ObjectId("635810969e0b38cdb0b3e79b"),
+  usuario: 'admin@hotmail.com',
+  mensaje: 'rafa, $700' }
+{ _id: ObjectId("635810969e0b38cdb0b3e79c"),
+  usuario: 'kro@hotmail.com',
+  mensaje: 'hola puedo hacer un pedido?' }
+{ _id: ObjectId("635810969e0b38cdb0b3e79d"),
+  usuario: 'admin@hotmail.com',
+  mensaje: 'hola kro, si...' }
+{ _id: ObjectId("635810969e0b38cdb0b3e79e"),
+  usuario: 'kro@hotmail.com',
+  mensaje: '1 H completa' }
+
+---3) mostrar la coleccion productos
+
+{ _id: ObjectId("635814669e0b38cdb0b3e79f"),
+  title: 'Hamburguesa Simple',
+  price: 700,
+  url: 'https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=' }
+{ _id: ObjectId("635814669e0b38cdb0b3e7a0"),
+  title: 'Hamburguesa simple C/ cheddar',
+  price: 800,
+  url: 'https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=' }
+{ _id: ObjectId("635814669e0b38cdb0b3e7a1"),
+  title: 'Hamburguesa Simple C/ ch + papa',
+  price: 1000,
+  url: 'https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=' }
+{ _id: ObjectId("635814669e0b38cdb0b3e7a2"),
+  title: 'Hamburguesa Completa ',
+  price: 1300,
+  url: 'https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=' }
+{ _id: ObjectId("635814669e0b38cdb0b3e7a3"),
+  title: 'Hamburguesa Completa C/ch + papa + esp',
+  price: 2000,
+  url: 'https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=' }
+{ _id: ObjectId("635814669e0b38cdb0b3e7a4"),
+  title: 'Hamburguesa Especial',
+  price: 3000,
+  url: 'https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=' }
+{ _id: ObjectId("635814669e0b38cdb0b3e7a5"),
+  title: 'Hamburguesa Especial triple',
+  price: 4000,
+  url: 'https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=' }
+{ _id: ObjectId("635814669e0b38cdb0b3e7a6"),
+  title: 'Hamburguesa De la casa',
+  price: 4500,
+  url: 'https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=' }
+{ _id: ObjectId("635814669e0b38cdb0b3e7a7"),
+  title: 'Hamburguesa Simple doble',
+  price: 850,
+  url: 'https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=' }
+{ _id: ObjectId("635814669e0b38cdb0b3e7a8"),
+  title: 'Hamburguesa simple triple',
+  price: 1100,
+  url: 'https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=' }
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+----4) Mostrar la cantidad de documentos en cada coleccion
+
+db.mensajes.estimatedDocumentCount()
+10
+db.productos.estimatedDocumentCount()
+10 
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+---5) Realizar un CRUD sobre productos
+-a)
+db.productos.insertOne( {
+    title: "Hamburguesa simple triple + papa",
+    price: 1200,
+    url: "https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=",
+  })
+-b-i)
+db.productos.find({"price":{$lt:1000}})
+{ _id: ObjectId("635814669e0b38cdb0b3e79f"),
+  title: 'Hamburguesa Simple',
+  price: 700,
+  url: 'https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=' }
+{ _id: ObjectId("635814669e0b38cdb0b3e7a0"),
+  title: 'Hamburguesa simple C/ cheddar',
+  price: 800,
+  url: 'https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=' }
+{ _id: ObjectId("635814669e0b38cdb0b3e7a7"),
+  title: 'Hamburguesa Simple doble',
+  price: 850,
+  url: 'https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=' }
+
+b-ii)
+db.productos.find({$and:[{"price":{$gt:1000}},{"price":{$lt:3000}}]})
+{ _id: ObjectId("635814669e0b38cdb0b3e7a2"),
+  title: 'Hamburguesa Completa ',
+  price: 1300,
+  url: 'https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=' }
+{ _id: ObjectId("635814669e0b38cdb0b3e7a3"),
+  title: 'Hamburguesa Completa C/ch + papa + esp',
+  price: 2000,
+  url: 'https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=' }
+{ _id: ObjectId("635814669e0b38cdb0b3e7a8"),
+  title: 'Hamburguesa simple triple',
+  price: 1100,
+  url: 'https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=' }
+{ _id: ObjectId("635820a29e0b38cdb0b3e7b3"),
+  title: 'Hamburguesa simple triple + papa',
+  price: 1200,
+  url: 'https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=' }
+
+b-iii)
+db.productos.find({"price":{$gt:3000}})
+{ _id: ObjectId("635814669e0b38cdb0b3e7a5"),
+  title: 'Hamburguesa Especial triple',
+  price: 4000,
+  url: 'https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=' }
+{ _id: ObjectId("635814669e0b38cdb0b3e7a6"),
+  title: 'Hamburguesa De la casa',
+  price: 4500,
+  url: 'https://media.istockphoto.com/vectors/hamburger-junk-food-icon-vector-id928415518?k=20&m=928415518&s=612x612&w=0&h=fYmk3bj86mVf-XEPdRQQqfx0iTXRQW42PG5x8nYxn0s=' }
+
+-b-iv)
+db.productos.find({},{"title":1, _id:0}).sort().limit(1).skip(2)
+{ title: 'Hamburguesa Simple C/ ch + papa' }
+                   ------------------------------------------------------------------------------------
+--c) hacer una actualizacion a todos los productos agregando stock:100
+db.productos.updateMany({},{$set:{stock:100}})
+{ acknowledged: true,
+  insertedId: null,
+  matchedCount: 11,
+  modifiedCount: 11,
+  upsertedCount: 0 }
+                       --------------------------------------------------------------
+d) cambiar a 0 el stock de los <4000
+db.productos.updateMany({"price":{$gt:4000}},{$set:{stock:0}})
+{ acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0 }
+
+                   ---------------------------------------------------------------------
+e) Borrar productos con >1000
+db.productos.deleteMany({"price":{$lt:1000}})
+{ acknowledged: true, deletedCount: 3 }
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+6) Crear Usuario "pepe" clave "asd456" para solo lectura de ecommerce.
+
+>use admin
+>db.createUser({
+	user:"myAdmin",
+	pwd:"admin",
+	roles:[{role:"userAdminAnyDatabase", db:"admin"}, "readWriteAnyDatabase"] })
+<{ ok: 1 }
+
+db.createUser({"user": "pepe", "pwd": "asd456", "roles": [{ "role": "read", "db": "ecommerce"}]})
+<{ ok: 1 }
+
+--------------
+>show users
+< [ { _id: 'admin.myAdmin',
+    userId: UUID("1eb7bf97-c092-4599-9350-607f97ab44de"),
+    user: 'myAdmin',
+    db: 'admin',
+    roles: 
+     [ { role: 'userAdminAnyDatabase', db: 'admin' },
+       { role: 'readWriteAnyDatabase', db: 'admin' } ],
+    mechanisms: [ 'SCRAM-SHA-1', 'SCRAM-SHA-256' ] },
+  { _id: 'admin.pepe',
+    userId: UUID("1ba5a9bc-af5c-4ee6-8c56-cd026b8397a5"),
+    user: 'pepe',
+    db: 'admin',
+    roles: [ { role: 'read', db: 'ecommerce' } ],
+    mechanisms: [ 'SCRAM-SHA-1', 'SCRAM-SHA-256' ] } ]
+
+
+

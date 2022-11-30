@@ -1,0 +1,41 @@
+[
+  {
+    "title": "Ergonómico Acero Pollo",
+    "price": 122,
+    "thumbnail": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1241.jpg",
+    "id": 1
+  },
+  {
+    "title": "Rústico Plástico Ordenador",
+    "price": 140,
+    "thumbnail": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/918.jpg",
+    "id": 2
+  },
+  {
+    "title": "Guapa Acero Coche",
+    "price": 183,
+    "thumbnail": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/500.jpg",
+    "id": 3
+  },
+  {
+    "title": "Rústico Hormigon Pelota",
+    "price": 56,
+    "thumbnail": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1200.jpg",
+    "id": 4
+  },
+  {
+    "title": "Artesanal Granito Raton",
+    "price": 129,
+    "thumbnail": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/454.jpg",
+    "id": 5
+  },
+  {
+    "title": "Hamburguesa",
+    "Descripcion": "Super ",
+    "codigo": "B50",
+    "precio": "1350",
+    "foto": "https://w7.pngwing.com/pngs/39/490/png-transparent-burger-thumbnail.png",
+    "stock": "100",
+    "id": 6
+  }
+]

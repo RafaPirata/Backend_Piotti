@@ -1,9 +1,10 @@
 const express = require("express");
 const { Router } = express;
+
 const { Server: HttpServer } = require("http");
 const { Server: Socket } = require("socket.io");
-const ContenedorSQL = require("./src/contenedores/ContenedorSQL.js");
 
+const ContenedorSQL = require("./src/contenedores/ContenedorSQL.js");
 const { optionsMariaDB, optionsSqlite } = require("./src/config.js");
 
 const faker = require("faker");

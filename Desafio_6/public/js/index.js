@@ -11,6 +11,10 @@ const addProduct = () => {
   return false;
 };
 
+socket.on("productos", (data) => {
+  renderProducts(data);
+});
+
 const renderProducts = (data) => {
   const html = data
     .map((el) => {
@@ -29,11 +33,68 @@ const renderProducts = (data) => {
         `;
     })
     .join(" ");
-  document.getElementById("datos").innerHTML = html;
-};
+    document.getElementById("datos").innerHTML = html;
+  };
+  
 
-socket.on("productos", (data) => {
-  renderProducts(data);
+/* --------------------- DESNORMALIZACIÓN DE MENSAJES ---------------------------- */
+// Definimos un esquema de autor
+const schemaAuthor = new normalizr.schema.Entity('author', {}, { idAttribute: 'id' });
+
+// Definimos un esquema de mensaje
+const schemaMensaje = new normalizr.schema.Entity('post', { author: schemaAuthor }, { idAttribute: '_id' })
+
+// Definimos un esquema de posts
+const schemaMensajes = new normalizr.schema.Entity('posts', { mensajes: [ schemaMensaje ] }, { idAttribute: 'id' })
+/* ----------------------------------------------------------------------------- */
+
+
+
+const username = document.getElementById("username");
+const texto = document.getElementById("texto");
+const btn = document.getElementById("enviar");
+
+function agregarMensaje(evt) {
+  if (username.value === "" || texto.value === "") {
+    alert("Debe ingresar el nombre y el mensaje");
+  }
+  const mensaje = {
+    author: {
+        email: username.value,
+        nombre: document.getElementById('firstname').value,
+        apellido: document.getElementById('lastname').value,
+        edad: document.getElementById('age').value,
+        alias: document.getElementById('alias').value,
+        avatar: document.getElementById('avatar').value
+    },
+    text: texto.value
+}
+
+
+  socket.emit("nuevoMensaje", mensaje);
+  texto.value = "";
+  texto.focus();
+  btn.disabled = true;
+  return false;
+}
+
+socket.on("mensajes", mensajesN => {
+
+  let mensajesNsize = JSON.stringify(mensajesN).length
+  console.log(mensajesN, mensajesNsize);
+
+  let mensajesD = normalizr.denormalize(mensajesN.result, schemaMensajes, mensajesN.entities)
+
+  let mensajesDsize = JSON.stringify(mensajesD).length
+  console.log(mensajesD, mensajesDsize);
+
+  let porcentajeC = parseInt((mensajesNsize * 100) / mensajesDsize)
+  console.log(`Porcentaje de compresión ${porcentajeC}%`)
+  document.getElementById('compresion-info').innerText = porcentajeC
+
+  console.log(mensajesD.mensajes);
+
+  render(mensajesD.mensajes);
 });
 
 const render = (mensajes) => {
@@ -41,39 +102,14 @@ const render = (mensajes) => {
   let html = "";
   mensajes.forEach((mensaje) => {
     html += ` <li>       
-                <strong class="card-title">${mensaje.author}</strong> 
+                <strong class="card-title">${mensaje.email}</strong> 
                 [<label style="color: brown;" >${mensaje.fyh}</label>] :
-                <em class="card-text">${mensaje.text}</em>
+                <i style="color:green;">${mensaje.text}</i>
+                <em class="card-text">${mensaje.avatar}</em>
             </li>`;
   });
   document.getElementById("messages").innerHTML = html;
 };
-
-socket.on("mensajes", (mensajes) => {
-  render(mensajes);
-});
-
-let username = document.getElementById("username");
-let texto = document.getElementById("texto");
-let btn = document.getElementById("enviar");
-
-function agregarMensaje(evt) {
-  if (username.value === "" || texto.value === "") {
-    alert("Debe ingresar el nombre y el mensaje");
-  }
-
-  const mensaje = {
-    author: username.value,
-    text: texto.value,
-  };
-  socket.emit("nuevoMensaje", mensaje);
-  texto.value = "";
-  texto.focus();
-
-  btn.disabled = true;
-
-  return false;
-}
 
 username.addEventListener("input", () => {
   texto.disabled = !(username.value.length > 0);
@@ -83,78 +119,3 @@ username.addEventListener("input", () => {
 texto.addEventListener("input", () => {
   btn.disabled = !texto.value.length;
 });
-
-// const server = io();
-
-// server.on("productos", (arrayProductos) => {
-//   // console.log(arrayProductos)
-//   if (!arrayProductos.length) {
-//     document.getElementById("datos").innerHTML =
-//       "<h2>No hay productos cargados</h2>";
-//   } else {
-//     document.getElementById("datos").innerHTML = crearTabla(arrayProductos);
-//   }
-// });
-
-// const crearTabla = (arrayProductos) => {
-//   let tabla = '<table class="table table-striped table-dark">';
-//   tabla +=
-//     '<thead><tr><th scope="col">id</th><th scope="col">title</th><th scope="col">price</th><th scope="col">thumbnail</th></tr></thead>';
-//   tabla += "<tbody>";
-//   arrayProductos.forEach((producto) => {
-//     tabla += `<tr>
-//                         <th scope="row">${producto.id}</th>
-//                             <td>${producto.title}</td>
-//                             <td>${producto.price}</td>
-//                             <td><img class="w-25" src="${producto.thumbnail}" alt="Imágen del producto"></td>
-//                         </tr>`;
-//   });
-//   tabla += "</tbody></table>";
-//   return tabla;
-// };
-
-// const getFetch = async (url, options) => {
-//   try {
-//     const resJson = await fetch(url, options);
-//     const data = await resJson.json();
-//     server.emit("update", "ok");
-//   } catch (error) {
-//     console.log(err);
-//   } finally {
-//     formulario.reset();
-//   }
-// };
-
-// const formulario = document.querySelector("form");
-// formulario.addEventListener("submit", (e) => {
-//   e.preventDefault();
-//   const data = new FormData(formulario);
-//   const producto = {
-//     title: data.get("title"),
-//     price: data.get("price"),
-//     thumbnail: data.get("thumbnail"),
-//   };
-
-//   const options = {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(producto),
-//   };
-
-//   getFetch("/productos", options);
-// });
-
-// async function crearTablaHbs(productos, cb) {
-//   try {
-//     let resText = await fetch("plantillas/tabla.hbs");
-//     let plantilla = await resText.text();
-//     console.log(plantilla);
-//     let template = Handlebars.compile(plantilla);
-//     let html = template({ productos });
-//     cb(html);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }

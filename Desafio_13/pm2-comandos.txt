@@ -1,0 +1,19 @@
+
+
+app.use('/data', infoRouter)
+
+http://localhost/data/datos
+
+//pm2 start app.js --name="Serverx" --watch -- PORT
+
+trabajos
+
+//pm2 start app.js --name="Server1" --watch -- 8081
+//pm2 start app.js --name="Server2" --watch -- 8082
+
+//pm2 start app.js --name="Server3" --watch -i max -- 8083 --------------- aca utilza todos los disponibles en mi caso 12
+
+//pm2 start app.js --name="Server3" --watch -i 2 -- 8085
+
+
+//pm2 start app.js --name="Server3" --watch -i 4 -- 8084

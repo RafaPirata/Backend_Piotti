@@ -1,0 +1,145 @@
+app.use('/data', infoRouter)
+
+http://localhost:8000/data/info
+
+
+
+//-----------------Desafio 14 compression --------------------------------------------
+
+
+sin compression /info 1.1 kB 30 ms
+    GET /data/info 200 12.528 ms - 788
+
+con compression /info 211 B 12 ms
+    GET /data/info 304 3.551 ms - -
+
+// --------------- prof con fork-------------------------------
+
+    //artillery quick -c 50 -n 20 "http://localhost:8000/data/info" > result_sinLog.txt
+    // node --prof-process sinLog-v8.log > result_prof_sinLog.txt
+
+    -----------resultado sin log----------------------------------------
+    [Summary]:
+        ticks  total  nonlib   name
+         12    0.2%  100.0%  JavaScript
+         0    0.0%    0.0%  C++
+         40    0.7%  333.3%  GC
+        5482   99.8%          Shared libraries
+
+
+   
+    // --------------- prof con fork-------------------------------
+
+    artillery quick -c 50 -n 20 "http://localhost:8000/data/info" > result_conLog.txt
+    // node --prof-process conLog-v8.log > result_prof_conLog.txt
+
+     -----------resultado con log----------------------------------------
+     [Summary]:
+   ticks  total  nonlib   name
+     38    0.5%  100.0%  JavaScript
+      0    0.0%    0.0%  C++
+     30    0.4%   78.9%  GC
+   7452   99.5%          Shared libraries
+
+//-------------------------- ox npm star (node app.js)-------------------------
+npm start
+
+> backend_piotti@1.0.0 start
+> 0x app.js
+
+Profilingdev
+{"level":"info","message":"rafael:conecatdo a Mongodb"}
+{"level":"info","message":"Cantidad de nucleos: '12"}
+{"level":"info","message":"config: ./DB/messages.json"}
+{"level":"info","message":"SERVER listen on port 8000"}
+{"level":"info","message":"Worker en FORK 32884 started"}
+Waiting for subprocess to exit...
+Process exited, generating flamegraph
+
+//-------------------------- Autocannon-------------------------
+
+rafae@LAPTOP-J2H6TNSH MINGW64 ~/OneDrive/Documents/07_Curso_Back/copia (master)
+$ npm test
+
+> backend_piotti@1.0.0 test
+> node benchmark.js
+
+Running all benchmarks in parallei...
+Running 20s test @ http://localhost:8000/data/info
+100 connections
+
+
+┌─────────┬───────┬───────┬────────┬────────┬──────────┬──────────┬────────┐
+│ Stat    │ 2.5%  │ 50%   │ 97.5%  │ 99%    │ Avg      │ Stdev    │ Max    │
+├─────────┼───────┼───────┼────────┼────────┼──────────┼──────────┼────────┤
+│ Latency │ 57 ms │ 70 ms │ 117 ms │ 136 ms │ 74.96 ms │ 16.78 ms │ 200 ms │
+└─────────┴───────┴───────┴────────┴────────┴──────────┴──────────┴────────┘
+┌───────────┬────────┬────────┬─────────┬─────────┬─────────┬────────┬────────┐
+│ Stat      │ 1%     │ 2.5%   │ 50%     │ 97.5%   │ Avg     │ Stdev  │ Min    │
+├───────────┼────────┼────────┼─────────┼─────────┼─────────┼────────┼────────┤
+│ Req/Sec   │ 752    │ 752    │ 1357    │ 1550    │ 1330    │ 185.88 │ 752    │
+├───────────┼────────┼────────┼─────────┼─────────┼─────────┼────────┼────────┤
+│ Bytes/Sec │ 770 kB │ 770 kB │ 1.39 MB │ 1.59 MB │ 1.36 MB │ 190 kB │ 769 kB │
+└───────────┴────────┴────────┴─────────┴─────────┴─────────┴────────┴────────┘
+
+Req/Bytes counts sampled once per second.
+# of samples: 20
+
+27k requests in 20.15s, 27.2 MB read
+
+
+
+//-------------------------- node --inspect app-------------------------
+$ node --inspect app
+Debugger listening on ws://127.0.0.1:9229/83c5670e-8420-4f93-b22b-bff813829b29
+For help, see: https://nodejs.org/en/docs/inspector
+dev
+{"level":"info","message":"rafael:conecatdo a Mongodb"}
+{"level":"info","message":"Cantidad de nucleos: '12"}
+{"level":"info","message":"config: ./DB/messages.json"}
+{"level":"info","message":"SERVER listen on port 8000"}
+{"level":"info","message":"Worker en FORK 19404 started"}
+Debugger attached.
+
+//-------------------------- node benchmark-------------------------
+
+$ node benchmark
+Running all benchmarks in parallei...
+Running 20s test @ http://localhost:8000/data/info
+100 connections
+
+
+┌─────────┬────────┬────────┬────────┬────────┬───────────┬──────────┬────────┐
+│ Stat    │ 2.5%   │ 50%    │ 97.5%  │ 99%    │ Avg       │ Stdev    │ Max    │
+├─────────┼────────┼────────┼────────┼────────┼───────────┼──────────┼────────┤
+│ Latency │ 152 ms │ 178 ms │ 276 ms │ 299 ms │ 186.28 ms │ 30.83 ms │ 369 ms │
+└─────────┴────────┴────────┴────────┴────────┴───────────┴──────────┴────────┘
+┌───────────┬────────┬────────┬────────┬────────┬────────┬─────────┬────────┐
+│ Stat      │ 1%     │ 2.5%   │ 50%    │ 97.5%  │ Avg    │ Stdev   │ Min    │
+├───────────┼────────┼────────┼────────┼────────┼────────┼─────────┼────────┤
+│ Req/Sec   │ 328    │ 328    │ 562    │ 600    │ 535    │ 72.57   │ 328    │
+├───────────┼────────┼────────┼────────┼────────┼────────┼─────────┼────────┤
+│ Bytes/Sec │ 325 kB │ 325 kB │ 557 kB │ 595 kB │ 530 kB │ 71.9 kB │ 325 kB │
+└───────────┴────────┴────────┴────────┴────────┴────────┴─────────┴────────┘
+
+Req/Bytes counts sampled once per second.
+# of samples: 20
+
+11k requests in 20.15s, 10.6 MB read
+
+///////////////--------------------///////////////////------------------//////////////////------------------/////////////
+
+Conclusion: 
+            la incorporacion de compression (zip) a todo el proyecto logro un 
+            optimizacion del 80% en velocidad de ejecucion.
+             --prof con artillery:
+                tomando la consiga que era trabajar sobre la ruta /data/info y el el probar el modo FORK,
+             incoporando y retirando un log , el resultado fue bastante mejorado en cuanto sus ticks m ejnorando + 60%.
+             0x node:
+                en cuanto a poder visualizar los cuellos de botellas, en nuestro caso utilizandio solo la ruta data/info
+                solo pudimos observar nuestro cuellos a la hora de verificar los argumentos de la consulta del json.
+
+    
+    
+
+

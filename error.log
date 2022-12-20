@@ -1,0 +1,2 @@
+{"level":"error","message":"Error MongoDB getOneProducts: CastError: Cast to ObjectId failed for value \"favicon.ico\" (type string) at path \"_id\" for model \"productos\""}
+{"level":"error","message":"Error MongoDB getOneProducts: CastError: Cast to ObjectId failed for value \"favicon.ico\" (type string) at path \"_id\" for model \"productos\""}
